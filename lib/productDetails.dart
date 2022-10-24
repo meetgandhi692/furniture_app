@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:badges/badges.dart';
 import 'package:like_button/like_button.dart';
+import 'wishlistPage.dart';
+import 'cartPage.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({Key? key}) : super(key: key);
@@ -43,8 +45,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 return Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
                     ),
                     color: Color.fromRGBO(44, 53, 57, 1),
                   ),
@@ -89,7 +91,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
-                                fontWeight: FontWeight.w100),
+                                fontWeight: FontWeight.w200),
                           ),
                         ),
                         buildSizedBox(14),
@@ -165,6 +167,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                         buildDivider(),
                         ExpansionTile(
+                          iconColor: Colors.white,
+                          collapsedIconColor: Colors.white,
                           title: const Text(
                             'Product details',
                             style: TextStyle(
@@ -190,6 +194,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                         buildDivider(),
                         ExpansionTile(
+                          iconColor: Colors.white,
+                          collapsedIconColor: Colors.white,
                           title: const Text(
                             'Materials',
                             style: TextStyle(
@@ -229,7 +235,6 @@ class _ProductDetailsState extends State<ProductDetails> {
       ),
     );
   }
-
   SizedBox buildSizedBox(double h) => SizedBox(height: h);
 
   Container buildDivider() {
@@ -251,7 +256,10 @@ class _ProductDetailsState extends State<ProductDetails> {
       backgroundColor: const Color.fromRGBO(44, 53, 57, 1),
       elevation: 2,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const WishlistPage())
+          );
+        },
         icon: SvgPicture.asset(
           "assets/svg/back.svg",
           color: Colors.white,
@@ -259,7 +267,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(top: 9, right: 25.0),
+          padding: const EdgeInsets.only(top: 10, right: 25.0),
           child: LikeButton(
             onTap: onLikeButtonTapped,
           ),
@@ -276,10 +284,16 @@ class _ProductDetailsState extends State<ProductDetails> {
         //   ),
         // ),
         Padding(
-          padding: const EdgeInsets.only(top: 9, right: 20.0),
+          padding: const EdgeInsets.only(top: 12, right: 20.0),
           child: Badge(
             badgeContent: const Text('0'),
-            child: SvgPicture.asset("assets/svg/cart.svg"),
+            // child: SvgPicture.asset("assets/svg/cart.svg"),
+            child: IconButton(
+              icon: SvgPicture.asset("assets/svg/cart.svg"),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartPage()));
+              },
+            ),
           ),
         ),
       ],
